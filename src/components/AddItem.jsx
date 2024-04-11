@@ -2,21 +2,24 @@ import { useContext } from "react";
 import TaskContext from "./TaskContext.jsx";
 
 export default function AddItem() {
-  // Hacemos uso del contexto y accedemos a la función 'taskActions'
   const { taskActions } = useContext(TaskContext);
   function handleAddTask(e) {
     e.preventDefault();
-    // Llamamos al actions especificándole 'type'
-    // asi como también la tarea que se va a agregar
     let textbox = e.target.elements.task;
     taskActions({ type: "add", payload: textbox.value });
     textbox.value = "";
   }
   return (
-    <li>
-      <form onSubmit={handleAddTask}>
-        <input name="task" type="text"/>
-        <button type="submit">+</button>
+    <li className="list-group-item">
+      <form onSubmit={handleAddTask} className="d-flex justify-content-between">
+        <input name="task" type="text" className="w-100 form-control" />
+        <button
+          type="submit"
+          role="button"
+          className="btn btn-info rounded-pill"
+        >
+          <i className="bi bi-plus"></i>
+        </button>
       </form>
     </li>
   );

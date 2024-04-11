@@ -3,23 +3,24 @@ import { useReducer, createContext, useContext } from "react";
 const TaskContext = createContext(null);
 
 const TaskReducer = (state, action) => {
-	switch (action.type) {
+  switch (action.type) {
     case "add":
       return [...state, action.payload];
     case "remove":
-      let newState=[...state]
-		newState.splice(action.index, 1);
-      return newState
+      return state.splice(action.id, 1);
     default:
       return state;
   }
 };
 
+const useTasks = useContext(TaskContext);
 export function TaskProvider({ children }) {
-  const [tasks, taskActions ]= useReducer(TaskReducer, ["Hola"]);
+  const [tasks, dispatch] = useReducer(TaskReducer, []);
   return (
-    <TaskContext.Provider value={{tasks, taskActions }}>{children}</TaskContext.Provider>
+    <TaskContext.Provider value={{ tasks, dispatch }}>
+      {children}
+    </TaskContext.Provider>
   );
 }
 
-export default TaskContext;
+export default useTasks;

@@ -1,13 +1,11 @@
-// App.jsx
-import React, { useContext } from "react";
+import { useContext } from "react";
 import "./App.css";
 import TaskContext from "./TaskContext.jsx";
 import ListItem from "./ListItem.jsx";
 import AddItem from "./AddItem.jsx";
 
 export default function App() {
-  // Accedemos al contexto, pero esta vez solo vamos a usar 'tasks'
-  const { tasks } = useContext(TaskContext);
+  const {tasks} = useContext(TaskContext);
 
   return (
     <main>
